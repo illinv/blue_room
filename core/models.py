@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class ProjectManager:
+class ProjectManager(models.Manager):
     pass
 
 
@@ -12,6 +12,7 @@ class Project(models.Model):
     """
     title = models.CharField(verbose_name='Название проекта', max_length=200)
     description = models.TextField(verbose_name='Описание проекта')
+    objects = ProjectManager()
 
     def __str__(self):
         return self.title
