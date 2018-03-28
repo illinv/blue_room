@@ -2,7 +2,11 @@ from django.db import models
 
 
 class ProjectManager(models.Manager):
-    pass
+    def get_features_by_project_id(self, pk):
+        return Feature.objects.filter(project=pk)
+
+    def get_bugs_by_project_id(self, pk):
+        return Bug.objects.filter(feature__project=pk)
 
 
 class Project(models.Model):
@@ -54,5 +58,3 @@ class TestCase(models.Model):
     feature = models.ForeignKey('Feature', verbose_name='Связная фича', on_delete=models.CASCADE)
     case = models.TextField(verbose_name='Тестовый случай')
     expected_behavior = models.TextField(verbose_name='Ожидаемое поведение')
-
-
