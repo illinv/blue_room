@@ -4,7 +4,7 @@ from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 
 from core.models import Project, Feature, Bug, TestCase
-from api.v1.serializers import ProjectSerializer, FeatureSerializer
+from api.v1.serializers import ProjectSerializer, FeatureSerializer, BugSerializer, TestCaseSerializer
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -32,11 +32,16 @@ class FeatureViewSet(mixins.CreateModelMixin,
 
     queryset = Feature.objects.all()
     serializer_class = FeatureSerializer
+    permission_classes = [AllowAny]
 
 
-class BugDetail(viewsets.ModelViewSet):
-    pass
+class BugViewSet(viewsets.ModelViewSet):
+    queryset = Bug.objects.all()
+    serializer_class = BugSerializer
+    permission_classes = [AllowAny]
 
 
 class TestCaseViewSet(viewsets.ModelViewSet):
-    pass
+    queryset = TestCase.objects.all()
+    serializer_class = TestCaseSerializer
+    permission_classes = [AllowAny]

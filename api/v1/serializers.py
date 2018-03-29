@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Project, Feature, Bug
+from core.models import Project, Feature, Bug, TestCase
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -11,11 +11,16 @@ class ProjectSerializer(serializers.ModelSerializer):
 class BugSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bug
-        field = '__all__'
+        fields = '__all__'
 
 
 class FeatureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feature
-        fields = ("id", "title", "description", "is_release", "project", "bugs")
+        fields = ("id", "title", "description", "is_release", "project", )
 
+
+class TestCaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TestCase
+        fields = '__all__'
