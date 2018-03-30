@@ -1,0 +1,3 @@
+[submodule "blue_room-front"]
+	path = blue_room-front
+	url = https://github.com/illinv/blue_room-front.git
