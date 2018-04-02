@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Project, Feature, Bug, TestCase
+from core.models import Project, Feature, Bug, TestCase, Issue
 
 
 @admin.register(Project)
@@ -22,3 +22,6 @@ class TestCaseAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(Issue)
+class IssueAdmin(admin.ModelAdmin):
+    pass

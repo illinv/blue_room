@@ -17,7 +17,7 @@ class BugSerializer(serializers.ModelSerializer):
 class FeatureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feature
-        fields = ("id", "title", "description", "is_release", "project", )
+        fields = '__all__'
 
 
 class TestCaseSerializer(serializers.ModelSerializer):
