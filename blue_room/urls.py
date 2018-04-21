@@ -23,6 +23,7 @@ from api import urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'api/', include('api.urls')),
+    path(r'', include('apps.site.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

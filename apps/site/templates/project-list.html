@@ -1,0 +1,25 @@
+{% extends 'base-list.html' %}
+
+{% block content %}
+
+{% for project in object_list %}
+                <div class="col-md-4 col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="/project/{{project.pk}}">{{project.title}}</a>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{project.description}}</p>
+                        </div>
+                        <div class="panel-footer">
+                            <span class="features_stats">Фичи:{{project.count_features}}</span>
+                            <span class="bug_stats">Баги:{{project.count_bugs}}</span>
+                            <span class="issue_stats">Ишью:{{project.count_open_issues}}</span>
+                        </div>
+                    </div>
+                </div>
+{% empty %}
+    No projects yet.
+{% endfor %}
+
+{% endblock %}

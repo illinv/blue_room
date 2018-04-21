@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_filters',
     'core',
     'api',
+    'apps.site'
 ]
 
 MIDDLEWARE = [
@@ -107,10 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-STATICFILES_DIRS = (
-    #This lets Django's collectstatic store our bundles
-    os.path.join(BASE_DIR, 'blue_room-front'),
-)
 
 
 REST_FRAMEWORK = {
@@ -141,4 +138,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join('')
+STATICFILES_DIRS = ( os.path.join('static'), )
