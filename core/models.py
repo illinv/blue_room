@@ -58,6 +58,16 @@ class Project(models.Model):
 
 
 class Feature(models.Model):
+    LOW_PRIORITY = 'L'
+    MIDDLE_PRIORITY = 'M'
+    HIGH_PRIORITY = 'H'
+
+    PRIORITY = (
+        (LOW_PRIORITY, 'Low'),
+        (MIDDLE_PRIORITY, 'Middle'),
+        (HIGH_PRIORITY, 'High'),
+    )
+
     title = models.CharField(verbose_name='Имя фичи', max_length=200)
     description = models.TextField(verbose_name='Описание фичи')
     project = models.ForeignKey('Project', verbose_name='Проект', related_name='project', on_delete=models.CASCADE)
@@ -65,6 +75,7 @@ class Feature(models.Model):
     planned_time = models.FloatField(verbose_name='Планируемое время в часах')
 
     is_release = models.BooleanField(default=False)
+    priority = models.CharField(verbose_name='Приоритет фичи', max_length=1, choices=PRIORITY)
 
     def __str__(self):
         return self.title
