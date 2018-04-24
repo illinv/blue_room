@@ -1,3 +1,4 @@
+from itertools import chain
 from django.db import models
 from django.utils.functional import cached_property
 
@@ -14,6 +15,11 @@ class ProjectManager(models.Manager):
 
     def get_count_features(self, pk):
         return Feature.objects.filter(project=pk).count()
+
+    def get_in_work_features_and_bugs(self, pk):
+        features = Feature.objects.filter(project=pk, status=Feature.IN_WORK_STATUS)
+        bugs = Bug.objects.filter(feature__project=pk)
+        return list(chain(features, bugs))
 
     def get_planed_time_project(self, pk):
         pass
@@ -68,6 +74,20 @@ class Feature(models.Model):
         (HIGH_PRIORITY, 'High'),
     )
 
+    NEW_STATUS = 'N'
+    IN_WORK_STATUS = 'IW'
+    REVIEW_STATUS = 'RW'
+    CANCELED_STATUS = 'C'
+    COMPLETED_STATUS = 'E'
+
+    STATUSES = (
+        (NEW_STATUS, 'New'),
+        (IN_WORK_STATUS, 'In work'),
+        (REVIEW_STATUS, 'Ready for a review'),
+        (CANCELED_STATUS, 'Canceled'),
+        (COMPLETED_STATUS, 'Completed')
+    )
+
     title = models.CharField(verbose_name='Имя фичи', max_length=200)
     description = models.TextField(verbose_name='Описание фичи')
     project = models.ForeignKey('Project', verbose_name='Проект', related_name='project', on_delete=models.CASCADE)
@@ -76,6 +96,7 @@ class Feature(models.Model):
 
     is_release = models.BooleanField(default=False)
     priority = models.CharField(verbose_name='Приоритет фичи', max_length=1, choices=PRIORITY)
+    status = models.CharField(verbose_name='Статус', max_length=2, choices=STATUSES)
 
     def __str__(self):
         return self.title

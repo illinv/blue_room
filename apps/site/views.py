@@ -16,6 +16,12 @@ class ProjectDetailView(DetailView):
     model = Project
     template_name = 'project-detail.html'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        project = context['object']
+        context['in_work'] = Project.objects.get_in_work_features_and_bugs(project.pk)
+        return context
+
 
 class FeatureDetail(DetailView):
     model = Feature

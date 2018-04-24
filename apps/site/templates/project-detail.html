@@ -25,7 +25,19 @@
 <h1>{{ object.title }}</h1>
 <p>{{ object.description }}</p>
 
-<h2>Фичи в работе:</h2>
+<h2>Сейчас в работе:</h2>
+    (тут необходимо выводить и фичи и баги)
+    <ul>
+    {% for obj in in_work %}
+        <li><a href="/feature/{{feature.pk}}">{{obj}}</a></li>
+    {% empty %}
+
+    <div>Фичи кончились(</div>
+    {% endfor %}
+    </ul>
+
+<h2>Срочно надо сделать:</h2>
+    (тут надо выводить и фичи и баги)
     <ul>
     {% for feature in object.features %}
         <li><a href="/feature/{{feature.pk}}">{{feature}}</a></li>
@@ -34,26 +46,5 @@
     <div>Фичи кончились(</div>
     {% endfor %}
     </ul>
-
-<h2>Фичи с высоким приоритетом:</h2>
-    <ul>
-    {% for feature in object.features %}
-        <li><a href="/feature/{{feature.pk}}">{{feature}}</a></li>
-    {% empty %}
-
-    <div>Фичи кончились(</div>
-    {% endfor %}
-    </ul>
-
-
-<h2>Баги:</h2>
-<ul>
-
-    {% for bug in object.bugs %}
-    <li>{{bug}}</li>
-    {% empty %}
-    <li>Багов нет)</li>
-    {% endfor %}
-</ul>
 
 {% endblock %}
