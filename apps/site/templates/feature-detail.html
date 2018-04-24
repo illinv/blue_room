@@ -1,0 +1,48 @@
+{% extends 'base-detail.html' %}
+
+{% block content %}
+<h2><a href="/project/{{object.project.pk}}">{{object.project}}</a>->{{ object.title }}</h2>
+<div>
+    <span>Приоритет: {{object.priority}}</span>
+    <span>Время создания: {{object.created_time}}</span>
+    <span>Планируемое время: {{object.planned_time}}</span>
+    <span>Фактическое время: </span>
+</div>
+
+<div>
+    <button class="btn btn-info">Взять в работу</button>
+</div>
+
+<div>
+    {{object.description}}
+</div>
+
+<div>
+    {% if bugs %}
+    <h2>Связные баги:</h2>
+    {% for bug in bugs %}
+    {{bug}}
+    {% endfor %}
+    {% endif %}
+</div>
+
+<div>
+    Статус: (не реализованно)
+</div>
+
+<div>
+    <h2>Критерии качества:</h2>
+    {% if test_cases %}
+        {% for test_case in test_cases %}
+        <div>Кейс: {{test_case.case}}</div>
+        <div>Ожидаемое поведение: {{test_case.expected_behavior}}</div>
+        {% endfor %}
+    {% endif %}
+
+    <button class="btn">Добавить</button>
+
+</div>
+
+
+
+{% endblock %}

@@ -25,10 +25,20 @@
 <h1>{{ object.title }}</h1>
 <p>{{ object.description }}</p>
 
-<h2>Фичи:</h2>
+<h2>Фичи в работе:</h2>
     <ul>
     {% for feature in object.features %}
-        <li>{{feature}}</li>
+        <li><a href="/feature/{{feature.pk}}">{{feature}}</a></li>
+    {% empty %}
+
+    <div>Фичи кончились(</div>
+    {% endfor %}
+    </ul>
+
+<h2>Фичи с высоким приоритетом:</h2>
+    <ul>
+    {% for feature in object.features %}
+        <li><a href="/feature/{{feature.pk}}">{{feature}}</a></li>
     {% empty %}
 
     <div>Фичи кончились(</div>
